@@ -30,6 +30,42 @@ Upload → S3 Bucket → Lambda Function → Resized Image → Output S3 Bucket
 * Amazon CloudWatch
 * Python
 * Serverless Architecture
+  ## Deployment (AWS Lambda)
+
+The Lambda function and dependencies are packaged together before deployment.
+
+### Project Structure
+
+```
+lambda_function.py
+requirements.txt
+```
+
+### Install Dependencies
+
+Install the required libraries into the deployment folder:
+
+```bash
+pip install -r requirements.txt -t .
+```
+
+### Create Deployment Package
+
+Zip the function code and dependencies:
+
+```bash
+zip -r deployment-package.zip .
+```
+
+### Upload to AWS Lambda
+
+1. Go to AWS Lambda console.
+2. Create or open your Lambda function.
+3. Upload `deployment-package.zip` as the function code.
+4. Configure the S3 trigger for the input bucket.
+
+Once deployed, uploading an image to the S3 bucket will automatically trigger the Lambda function and store the resized image in the output bucket.
+
 
 ## Performance Analysis
 
